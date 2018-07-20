@@ -1,4 +1,6 @@
-const jsonResponse = [ { created_at: 'Thu Jul 19 22:35:59 +0000 2018',
+const jsonResponse = [
+
+  { created_at: 'Thu Jul 19 22:35:59 +0000 2018',
     id: 1020074803565215700,
     id_str: '1020074803565215744',
     text: 'best of luck https://t.co/omb64m5sPL',

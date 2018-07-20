@@ -3,30 +3,39 @@ import jsonResponse from './mockTweets.js';
 import { Tweet } from './components/tweet';
 import { SearchBar } from './components/searchBar';
 
-// import { App } from './App';
-
 export class View extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			srtString: undefined,
-			bool: false
+			user: false,
+			tokens: window.location.search
 		}
 	}
 
-	redirectToRequestToken() {
-    window.location.href = "http://localhost:3001/request-token";
+	componentDidMount() {
+  	this.getTwitterUser()
   }
 
+	getTwitterUser() {
+		fetch("http://127.0.0.1:3001/access-token"+window.location.search)
+		  .then(user => user.json())
+			.then(user => this.setState({ user: user }));
+	}
+
   render() {
-    return (
-      <div>
-				<SearchBar />
-        <button onClick={this.redirectToRequestToken} type="submit" className="twt__signin-btn"></button>
-					<div className="twt__twitter-feed">
-		        <Tweet tweets={jsonResponse} />
-		      </div>
-      </div>
+    if(this.state.user) {
+			return (
+	      <div className="twt__twitter-feed">
+					<SearchBar />
+
+					<p>[User Object response here]: {this.state.user.name}</p>
+
+					<Tweet tweets={jsonResponse}/>
+	      </div>
+			)
+		}
+		return(
+			<div>LOADING...</div>
 		)
   }
 }

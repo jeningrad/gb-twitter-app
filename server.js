@@ -1,27 +1,32 @@
 "use strict";
-var express = require("express");
-var Twitter = require("node-twitter-api");
-var app = express();
-
-app.get('/', (req, res) => res.send('Hello Radfe!'))
-app.listen(3001, () => console.log('Example app listening on port 3001!'))
+const express = require("express");
+const Twitter = require("node-twitter-api");
+const app = express();
+require('dotenv').config();
+app.listen(3001);
 
 // twitter keys/tokens
-var twitter = new Twitter({
-  consumerKey: 'JIG5TeMfMiHU2UFKzNMPdWO0l',
-	consumerSecret: 'O7skIZT4Tj3X2yK407hr2OqMJAAtkznvkdAIK7xx9L8dtMbgyF',
-	callback: "https://blooming-spire-93739.herokuapp.com/success.html",
-  access_token_key: '33181606-KDt5vALWaQIeihUavDp5QK6jMrw8RheztAb9y844J',
-  access_token_secret: '8cP8cqYI5MzSreZfHesQyBdkWaT9ZxtBmgGwZNdi47GyD',
+const twitter = new Twitter({
+  consumerKey: process.env.CONSUMERKEY,
+	consumerSecret: process.env.CONSUMERSECRET,
+	callback: "http://127.0.0.1:3000/"
 });
 
-var _requestSecret;
+// CORS fix
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
+// request oauth token
+var _requestSecret;
 app.get("/request-token", function(req, res) {
   twitter.getRequestToken(function(err,requestToken, requestSecret) {
-    if(err)
+    if(err) {
+    console.log("request token error");
       res.status(500).send(err);
-    else {
+    } else {
       console.log("requested token: " + requestToken);
       _requestSecret = requestSecret;
       res.redirect("https://api.twitter.com/oauth/authenticate?oauth_token=" + requestToken);
@@ -29,26 +34,26 @@ app.get("/request-token", function(req, res) {
   })
 });
 
-// TODO: From here, it's usually a good idea to store the user somewhere for easy retrieval
-// so the user doesn't have to sign in with Twitter every time he or she arrives at your site
-// "persistent authentication"
-
-
+// receive token + verifier
 app.get("/access-token", function(req, res) {
-  var requestToken = req.query.oauth_token,
-      verifier = req.query.oauth_verifier;
+  const requestToken = req.query.oauth_token,
+        verifier = req.query.oauth_verifier;
 
     twitter.getAccessToken(requestToken, _requestSecret, verifier, function(err, accessToken, accessSecret) {
-        if (err)
+      if (err) {
+        console.error('access token error')
+        res.status(500).send(err);
+      }
+      else
+        twitter.verifyCredentials(accessToken, accessSecret, function(err, user) {
+          if (err) {
+            console.error('verify user error')
             res.status(500).send(err);
-        else
-            twitter.verifyCredentials(accessToken, accessSecret, function(err, user) {
-                if (err)
-                    res.status(500).send(err);
-                else {
-                    console.log("values returned");
-                    res.send(user);
-                }
-            });
+            }
+          else {
+            console.log("values returned", user);
+            res.send(user);
+          }
+        });
     });
 });

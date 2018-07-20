@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import logo from './images/logo.svg';
 import { View } from './view';
 import './styles/App.scss';
+
+if (!(window.location.href.indexOf('oauth_token') > -1)) {
+  window.location.replace("/signin.html");
+}
 
 class App extends Component {
   render() {
