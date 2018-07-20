@@ -4,13 +4,13 @@ var Twitter = require("node-twitter-api");
 var app = express();
 
 app.get('/', (req, res) => res.send('Hello Radfe!'))
-app.listen(3001, () => console.log('Example app listening on port 3000!'))
+app.listen(3001, () => console.log('Example app listening on port 3001!'))
 
 // twitter keys/tokens
 var twitter = new Twitter({
   consumerKey: 'JIG5TeMfMiHU2UFKzNMPdWO0l',
 	consumerSecret: 'O7skIZT4Tj3X2yK407hr2OqMJAAtkznvkdAIK7xx9L8dtMbgyF',
-	callback: "http://127.0.0.1:3000/success.html",
+	callback: "https://blooming-spire-93739.herokuapp.com/success.html",
   access_token_key: '33181606-KDt5vALWaQIeihUavDp5QK6jMrw8RheztAb9y844J',
   access_token_secret: '8cP8cqYI5MzSreZfHesQyBdkWaT9ZxtBmgGwZNdi47GyD',
 });
