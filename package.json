@@ -54,9 +54,9 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "serve": "node server.js",
+    "express": "node server.js",
     "heroku-postbuild": "yarn build",
-    "runboth": "concurrently \"yarn build\" \"yarn serve\""
+    "runboth": "concurrently \"serve -s build\" \"yarn express\""
   },
   "devDependencies": {
     "json-loader": "^0.5.7",
