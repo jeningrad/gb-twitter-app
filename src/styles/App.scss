@@ -1,28 +1,100 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,800');
+
+html {
+  font-size: 75%;
+
+  body {
+    background: #F9F9F9;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    margin-top: 100px;
+  }
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.twt__signin-btn {
+  background: url("../images/twitter-btn.png");
+  width: 190px;
+  height: 40px;
+  margin-top: 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-size: cover;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.twt__search {
+  width: 200px;
+  margin: 20px auto;
+  position: absolute;
+  right: 20px;
+  top: 0px;
+
+  input {
+    padding: 5px 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  button {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 7px;
+    border: 0;
+    background: #CCC;
+    color: #FFF;
+    cursor: pointer;
+  }
 }
 
-.App-title {
-  font-size: 1.5em;
-}
+.twt {
 
-.App-intro {
-  font-size: large;
+  &__twitter-feed {
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
 }
+  &__tweet {
+    list-style: none;
+    border: 1px solid black;
+    background: #FFF;
+    width: 100%;
+    margin: 20px 0;
+    padding: 15px;
+    overflow: auto;
+    &-left {
+      position: absolute;
+    }
+    &-right {
+      text-align: left;
+      position: relative;
+      margin-left: 65px;
+    }
+  }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  &__text {
+    display: inline-block;
+    padding-top: 10px;
+  }
+
+  &__user {
+    &-info {
+      display: block;
+      overflow: auto;
+    }
+    &--name span {
+      font-weight: 800;
+      display: block;
+      float: left;
+    }
+    &--sname a {
+      float: left;
+      color: hotpink;
+      text-decoration: none;
+      padding-left: 5px;
+    }
+    &--time {
+      display: inline-block;
+      padding-left: 10px;
+      color: #CCC;
+    }
+  }
 }
