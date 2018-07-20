@@ -1,1 +1,1 @@
-web: yarn runboth
+web: yarn serve
