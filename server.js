@@ -9,7 +9,7 @@ app.listen(3001);
 const twitter = new Twitter({
   consumerKey: process.env.CONSUMERKEY,
 	consumerSecret: process.env.CONSUMERSECRET,
-	callback: "http://127.0.0.1:3000/"
+	callback: "https://blooming-spire-93739.herokuapp.com/"
 });
 
 // CORS fix
