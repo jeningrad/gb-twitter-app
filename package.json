@@ -30,6 +30,8 @@
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
+    "json-loader": "^0.5.7",
+    "node-sass": "^4.9.2",
     "node-twitter-api": "^1.8.0",
     "oauth": "^0.9.15",
     "object-assign": "4.1.1",
@@ -41,6 +43,7 @@
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.1",
     "resolve": "1.6.0",
+    "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "twitter": "^1.7.1",
@@ -58,11 +61,7 @@
     "heroku-postbuild": "yarn build",
     "runboth": "concurrently \"serve -s build\" \"yarn express\""
   },
-  "devDependencies": {
-    "json-loader": "^0.5.7",
-    "node-sass": "^4.9.2",
-    "sass-loader": "^7.0.3"
-  },
+  "devDependencies": {},
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"
